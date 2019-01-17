@@ -1,0 +1,16 @@
+.border1 {
+	border-width: 0.25px;
+	border-style: groove;
+	padding: 20px 20px 20px 20px;
+	margin: 20px;
+}
+.border2:hover {
+	border-color: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+body {
+	background-image: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ), url("bg.jpg");
+	background-size: cover;
+}
+.container {
+	color: black;
+}

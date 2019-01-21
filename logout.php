@@ -1,6 +1,9 @@
- <?php  
- //logout.php  
- session_start();  
- session_destroy();  
- header("location:index.php?action=login");  
- ?> 
+<?php
+
+
+session_start();
+if(session_destroy()) // Destroying All Sessions
+{
+header("Location: index.php"); // Redirecting To Home Page
+}
+?>

@@ -10,7 +10,69 @@
 body {
 	background-image: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ), url("bg.jpg");
 	background-size: cover;
+	align-items: center;
+	display: flex;
 }
 .container {
 	color: black;
+}
+input.btn {
+	margin: 20px 0;
+	padding: 20px;
+	font-size: 20px;
+	border-radius: 50px;
+}
+.button2:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+ .momo {
+	margin: 30px 0;
+}
+label {
+	font-size: 20px;
+	padding-top: 20px;
+}
+a.ex1:hover, a.ex1:active {color: blue;} {
+	
+}
+span.error {
+	color: red;
+}
+form.example {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 25px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+h1 {
+	padding-top: 80px;
+	padding-bottom: 30px;
 }

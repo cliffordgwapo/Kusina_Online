@@ -15,7 +15,7 @@
 			<link rel="stylesheet" type="text/css" href="style1.css">
 			<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 			<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
-			<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>  
+			<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
       </head>  
       <body>  
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,11 +29,11 @@
 
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-					<li class="nav-item active">
-						<a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
-					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="customer.php">Customer</a>
+						<a class="nav-link" href="home.php">Home</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Customer <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Menu</a>
@@ -59,31 +59,8 @@
 				</div>
 			</form>
 		</nav>
-			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			  <ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			  </ol>
-			  <div class="carousel-inner">
-				<div class="carousel-item active">
-				  <img class="d-block w-100" src="1.jpg" alt="First slide">
-				</div>
-				<div class="carousel-item">
-				  <img class="d-block w-100" src="2.jpg" alt="Second slide">
-				</div>
-				<div class="carousel-item">
-				  <img class="d-block w-100" src="3.jpg" alt="Third slide">
-				</div>
-			  </div>
-			  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			  </a>
-			  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			  </a>
-			</div>
+		<div class="img">
+		sdkodsjvj
+		</div>
       </body>
 </html>

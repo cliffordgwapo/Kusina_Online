@@ -20,3 +20,11 @@
   padding: 15px;
   text-align: center;
 }
+.img {
+	background-image: url("custom.jpg");
+	background-size: cover;
+	align-items: center;
+	display: flex;
+	height: 100%;
+	max-width: auto%;
+}

@@ -23,7 +23,7 @@
 .img {
 	background-image: url("custom.jpg");
 	background-size: cover;
-	align-items: center;
+	align-items: flex-start;
 	display: flex;
 	height: 100%;
 	max-width: auto%;

@@ -26,7 +26,7 @@
 		return $filter_Result;
 	}
 ?>
-<DOCTYPE! html>
+<!DOCTYPE html>
 <html lang="en"> 
       <head>  
            <title>Kusina Online</title>  
@@ -57,7 +57,7 @@
 						<a class="nav-link" href="customer.php">Customer <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Menu</a>
+						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Order</a>
@@ -80,7 +80,7 @@
 				</div>
 			</form>
 		</nav>
-		<div class="img">
+		
 		<div class="container" style="padding-top:20px">
 		<nav class="navbar navbar-light bg-light">
 			<a class="navbar-brand" href="#">Customer List</a>
@@ -92,7 +92,7 @@
 				
 		</nav>
 			<div class="table-responsive">
-				<table class="table table-hover table-dark">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 						<th>ID</th>
@@ -117,7 +117,7 @@
 									<div class="dropdown-menu">
 									<a data-toggle="modal" data-target="#exampleModalCenter1" class="dropdown-item">Add Customer</a>
 									<a class="dropdown-item" href="customer.php?edit=<?php echo $row['customer_id']; ?>">Edit</a>
-									<a class="dropdown-item" href="process1.php?delete=<?php echo $row["customer_id"]; ?>" onclick="return confirm('Are you sure?');">Delete</a>
+									<a class="dropdown-item" href="process1.php?deletemenu=<?php echo $row["customer_id"]; ?>" onclick="return confirm('Are you sure?');">Delete</a>
 									</div>
 								</div>
 							</td>
@@ -164,7 +164,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="form-control" style="width: 1200px">

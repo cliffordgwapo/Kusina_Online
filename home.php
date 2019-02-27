@@ -36,7 +36,7 @@
 						<a class="nav-link" href="customer.php">Customer</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Menu</a>
+						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Order</a>

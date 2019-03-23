@@ -1,11 +1,13 @@
 <?php
 
-	$mysqli = new mysqli('localhost', 'root', '', 'kusina') or die(mysqli($mysqli));
+	$mysqli = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
 	
 	$menu_id = 0;
 	$customer_id = 0;
+	$order_id = 0;
 	$update = false;
 	$update1 = false;
+	$update2 = false;
 	$first_name = '';
 	$last_name = '';
 	$middle_initial = '';
@@ -74,10 +76,12 @@
 		$mysqli->query("INSERT INTO customer_order (order_id, customer_id, timestamp) VALUES('$order_id', '$customer_id', '$timestamp')") or die($mysqli->error);
 		header("location: order.php");
 	}
-	if (isset($_GET['deletemenu'])) {
-		$menu_id = $_GET['deletemenu'];
-		$mysqli->query("DELETE FROM customer WHERE menu_id=$menu_id") or die($mysqli->error());
-		header("location: customer.php");
+	if (isset($_GET['delete_id'])) {
+		
+		$order_id = $_GET['delete_id'];
+		$sql = "DELETE FROM customer_order WHERE order_id='".$order_id."'";
+		$mysqli->query($sql) or die($mysqli->error());
+		header("location: order.php");
 	}
 	if (isset($_GET['editmenu'])) {
 		$menu_id = $_GET['editmenu'];
@@ -103,5 +107,25 @@
 		
 		$mysqli->query("UPDATE menu SET menu_id='$menu_id', menu_name='$menu_name', menu_description='$menu_description', price='$price', unit='$unit' WHERE menu_id=$menu_id") or die($mysqli->error);
 		header("location: menu.php");
+	}
+	if (isset($_GET['editorder'])) {
+		$order_id = $_GET['editorder'];
+		$update2 = true;
+		$sql = "SELECT * FROM customer_order WHERE order_id='".$order_id."'";
+		$result = $mysqli->query($sql) or die($mysqli->error());
+		if (@count($result)==1) {
+			$row = $result->fetch_array();
+			$order_id = $row['order_id'];
+			$customer_id = $row['customer_id'];
+			$timestamp = $row['timestamp'];
+		}
+	}
+	if (isset($_POST['updateorder'])) {
+		$order_id = $_POST['order_id'];
+		$customer_id = $_POST['customer_id'];
+		$timestamp = $_POST['timestamp'];
+		
+		$mysqli->query("UPDATE customer_order SET order_id='$order_id', customer_id='$customer_id', timestamp='$timestamp' WHERE order_id='".$order_id."'") or die($mysqli->error);
+		header("location: order.php");
 	}
 ?>

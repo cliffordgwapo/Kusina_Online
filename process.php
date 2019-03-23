@@ -13,7 +13,7 @@ $error = "Username or Password is invalid!";
 	$password = $_POST['password'];
 
 	// mysqli_connect() function opens a new connection to the MySQL server.
-	$conn = mysqli_connect("localhost", "root", "", "kusina");
+	$conn = mysqli_connect("localhost", "root", "", "kusina1");
 
 	// SQL query to fetch information of registerd users and finds user match.
 	$query = "SELECT username, password from admin where username=? AND password=? LIMIT 1";

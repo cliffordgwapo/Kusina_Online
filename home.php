@@ -39,7 +39,7 @@
 						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Order</a>
+						<a class="nav-link" href="order.php">Order</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Reports</a>

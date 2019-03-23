@@ -21,7 +21,7 @@
 	// function to connect and execute the query
 	function filterTable($query)
 	{
-		$connect = mysqli_connect("localhost", "root", "", "kusina");
+		$connect = mysqli_connect("localhost", "root", "", "kusina1");
 		$filter_Result = mysqli_query($connect, $query);
 		return $filter_Result;
 	}
@@ -60,7 +60,7 @@
 						<a class="nav-link" href="menu.php">Menu <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Order</a>
+						<a class="nav-link" href="order.php">Order</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Reports</a>
@@ -160,7 +160,14 @@
 									</div>
 									<div class="col-sm-6">
 										<label>Unit:</label>
-										<input type="text" class="form-control form-control-sm" name="unit" placeholder="unit" value="" required>
+										<select type="text" class="form-control form-control-sm" name="unit" placeholder="unit" value="" required>
+											<option value="Dozen">Dozen</option>
+											<option value="Packs">Packs</option>
+											<option value="Tray">Tray</option>
+											<option value="Kg">Kg</option>
+											<option value="Dozen">Pack Lunch</option>
+											<option value="Serve">Serve</option>
+										</select>
 									</div>
 								</div>
 								<div class="row" style="padding-top:20px">

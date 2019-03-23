@@ -21,7 +21,7 @@
 	// function to connect and execute the query
 	function filterTable($query)
 	{
-		$connect = mysqli_connect("localhost", "root", "", "kusina");
+		$connect = mysqli_connect("localhost", "root", "", "kusina1");
 		$filter_Result = mysqli_query($connect, $query);
 		return $filter_Result;
 	}
@@ -60,7 +60,7 @@
 						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Order</a>
+						<a class="nav-link" href="order.php">Order</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Reports</a>
@@ -117,7 +117,7 @@
 									<div class="dropdown-menu">
 									<a data-toggle="modal" data-target="#exampleModalCenter1" class="dropdown-item">Add Customer</a>
 									<a class="dropdown-item" href="customer.php?edit=<?php echo $row['customer_id']; ?>">Edit</a>
-									<a class="dropdown-item" href="process1.php?deletemenu=<?php echo $row["customer_id"]; ?>" onclick="return confirm('Are you sure?');">Delete</a>
+									<a class="dropdown-item" href="process1.php?delete=<?php echo $row["customer_id"]; ?>" onclick="return confirm('Are you sure?');">Delete</a>
 									</div>
 								</div>
 							</td>

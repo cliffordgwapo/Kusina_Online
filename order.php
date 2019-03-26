@@ -56,7 +56,9 @@
 				</div>
 
 				<a style="position: absolute;top: 10px;right: 30px;text-align: right" data-toggle="modal" data-target="#exampleModalCenter1" href=""><img src="add.png" width="40" height="40"></a>
+				<?php require_once 'process2.php';?>
 				<form style="position: absolute;bottom: 5px" action="process2.php" method="post">
+					<input type="hidden" name="hide_id" value="<?php echo $hide_id;?>">
 					<div class="row">
 						<div class="col-sm-3">
 							<select name="order_id" class="form-control form-control-sm" value="<?php echo $order_id ;?>" required>
@@ -71,7 +73,8 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select id="menus" name="menu_id" class="form-control form-control-sm" value="<?php echo $order_id ;?>" required>
+							<select id="menus" name="menu_id" class="form-control form-control-sm" value="<?php echo $menu_id;?>" required>
+								<option disabled>SELECT MENU:</option>
 								<?php
 									$con = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
 									$sql = "SELECT * FROM menu";
@@ -83,13 +86,17 @@
 							</select>
 						</div>
 						<div class="col-sm-2">
-							<input id="prices" type="number" class="form-control form-control-sm" name="price" placeholder="price" value="" disabled>
+							<input id="prices" type="number" class="form-control form-control-sm" name="price" placeholder="price" value="<?php echo $price;?>" required>
 						</div>
 						<div class="col-sm-2">
-							<input id="txt1" type="number" class="form-control form-control-sm" name="quantity" placeholder="quantity" value="" required>
+							<input type="number" class="form-control form-control-sm" name="quantity" placeholder="quantity" value="<?php echo $quantity;?>" required>
 						</div>
 						<div class="col-sm-2">
+						<?php if ($update3 == true):?>
+							<input id="answer" type="submit" class="form-control btn btn-info btn-sm" name="update_items" value="Update Items">
+						<?php else: ?>
 							<input id="answer" type="submit" class="form-control btn btn-primary btn-sm" name="item" value="Add Items">
+						<?php endif;?>
 						</div>
 					</div>
 					<script>
@@ -99,25 +106,20 @@
 							});
 						});
 					</script>
-				
+				</form>
 			</div>
 			<div class="col-sm-4" style="color:#00FF00;position: relative;border-style: solid">
-				<h1><p style="position: absolute;bottom: 30px;right: 30px;text-align: right">&#8369; <span id="txt3" ></span></p><h1>
-				<script>
-					$(document).ready(function(){
-					 
-					  $("#answer").click(function(){
-						  $("#txt3").text($("#prices").val() * $("#txt1").val())
-					  });
-					   $("#clear").click(function(){
-						$("#txt3").val(0);
-					  });
-					 
-					  
-					});
-				</script>
+				<h1 class="display-4 font-weight-bold" style="position:absolute;right:30px">Grand Total</h1>
+				<?php
+					$con = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
+					$sql = "SELECT SUM(price * quantity) AS `GrandTotal` FROM order_items";
+					$query_gtotal = mysqli_query($con,$sql);
+				?>
+				<?php while($row = mysqli_fetch_array($query_gtotal)):?>
+				<h1 class="display-4 font-weight-bold"><p style="position: absolute;bottom: 30px;right: 30px;text-align: right">&#8369; <?php echo $row['GrandTotal'];?></p><h1>
+				<?php endwhile;?>
 			</div>
-			</form>
+			
 		 </div>
 		<div class="row">
 			<div class="col-sm-7" style="border-style: solid">
@@ -135,43 +137,40 @@
 						</thead>
 						<?php
 							$con = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
-							$sql = "SELECT * FROM order_items";
+							$sql = "SELECT * FROM order_items,menu WHERE order_items.menu_id = menu.menu_id";
 							$query_items = mysqli_query($con,$sql);
-							$result = mysqli_num_rows($query_items);
+						?>
+						<?php while($row = mysqli_fetch_array($query_items)):?>
+						<?php 
 							$gtotal = 0;
-							if ($result > 0){
-								while ($row = mysqli_fetch_assoc($query_items)){
-								$order = $row['order_id'];
-								$menu = $row['menu_id'];
-								$price = $row['price'];
-								$qty = $row['quantity'];
-								$total = $price * $qty;
-								$gtotal += $total;
-								}
-							}
+							$order = $row['order_id'];
+							$menu = $row['menu_name'];
+							$p = $row['price'];
+							$qty = $row['quantity'];
+							$total = $p*$qty;
+							$gtotal += $total;
 						?>
 						<tbody>
 							<tr>
-								
 								<td><?php echo $order;?></td>
 								<td><?php echo $menu;?></td>
-								<td><?php echo "&#8369;" .$price;?></td>
-								<td><?php echo $qty;?></td>
-								<td><?php echo "&#8369;" .$total;?></td>
+								<td><?php echo "&#8369;" .$p;?></span></td>
+								<td><?php echo $qty;?></span></td>
+								<td>&#8369;<?php echo $total;?></td>
 								<td>
 									<div class="btn-group">
 									<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										
 									</button>
 										<div class="dropdown-menu">
-										<a data-toggle="modal" data-target="#exampleModalCenter1" class="dropdown-item">Add New Order</a>
-										<a class="dropdown-item" href="order.php?editorder=<?php echo $row['order_id']; ?>">Edit</a>
+										<a class="dropdown-item" href="order.php?edititems=<?php echo $row['hide_id']; ?>">Edit</a>
 										<a class="dropdown-item" href="process2.php?delete_order=<?php echo $row["hide_id"]; ?>" onclick="return confirm('Are you sure?');">Delete</a>
 										</div>
 									</div>
 								</td>
 							</tr>
 						</tbody>
+						<?php endwhile;?>
 					</table>
 				</div>
 			</div>
@@ -181,17 +180,22 @@
 						<thead>
 							<tr>
 							<th>Order ID</th>
-							<th>Customer ID</th>
+							<th>Name</th>
 							<th>Timestamp</th>
 							<th>Action</th>
 							</tr>
 						</thead>
-						<?php while($row = mysqli_fetch_array($search_result)):?>
+						<?php
+							$con = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
+							$sql = "SELECT * FROM customer_order,customer WHERE customer.customer_id = customer_order.customer_id";
+							$query_ordercus = mysqli_query($con,$sql);
+						?>
+						<?php while($row = mysqli_fetch_array($query_ordercus)):?>
 						<tbody>
 							<tr>
 								<td><?php echo $row['order_id'];?></td>
-								<td><?php echo $row['customer_id'];?></td>
-								<td><?php echo $row['timestamp'];?></td>
+								<td><?php echo $row['first_name'];?></td>
+								<td><?php echo $row['timestamp_dt'];?></td>
 								<td>
 									<div class="btn-group">
 									<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -233,8 +237,6 @@
 										<option value="<?php echo $row['customer_id'];?>"><?php echo $row['first_name'];?></option>
 									<?php endwhile;?>
 								</select>
-								<label class="col-form-label">Timestamp:</label>
-								<input type="datetime-local" class="form-control form-control-sm" name="timestamp" placeholder="timestamp" value="<?php echo $timestamp;?>" required>
 								<input class="btn btn-primary btn-block button2" type="submit" name="add" value="Save" onclick="return confirm('Are you sure?');">
 							</form>
 						</div>
@@ -270,8 +272,6 @@
 										<option value="<?php echo $row['customer_id'];?>"><?php echo $row['first_name'];?></option>
 									<?php endwhile;?>
 								</select>
-								<label class="col-form-label">Timestamp:</label>
-								<input type="datetime-local" class="form-control form-control-sm" name="timestamp" placeholder="timestamp" value="<?php echo $timestamp;?>" required>
 								<?php
 									if ($update2 == true):
 									echo "<script>$('#modal2').modal('show');</script>";

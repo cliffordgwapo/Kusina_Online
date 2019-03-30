@@ -57,7 +57,7 @@
 						<a class="nav-link" href="menu.php">Menu <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="order_reports.php">Order</a>
+						<a class="nav-link" href="order_reports.php">Reports</a>
 					</li>
 				</ul>
 			</div>

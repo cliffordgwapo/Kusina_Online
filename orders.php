@@ -109,30 +109,30 @@
 			<div class="col-sm-4" style="color:#00FF00;position: relative;border-style: solid">
 				<h1 class="display-4 font-weight-bold" style="position:absolute;right:30px">Grand Total</h1>
 					<?php
-					include_once 'db.php';
-					$id = $_SESSION['id'];
-					$order_id = $_GET['order'];
-					$sql = "SELECT * FROM order_items, menu, customer_order
-							WHERE order_items.menu_id = menu.menu_id
-							AND customer_order.order_id = order_items.order_id
-							AND customer_order.order_id = '$order_id';";
-					$result = mysqli_query($con, $sql);
-					$resultCheck = mysqli_num_rows($result);
-					$gtotal=0;
-					if ($resultCheck > 0) {
-						while ($row = mysqli_fetch_assoc($result)) {
-						$savequantity = $row["quantity"];
-						$saveprice = $row["price"];	
-						$quantityprice = $savequantity*$saveprice;
-						$gtotal += $quantityprice;
+					//include_once 'db.php';
+					//$id = $_SESSION['id'];
+					//$order_id = $_GET['order'];
+					//$sql = "SELECT * FROM order_items, menu, customer_order
+							//WHERE order_items.menu_id = menu.menu_id
+							//AND customer_order.order_id = order_items.order_id
+							//AND customer_order.order_id = '$order_id';";
+					//$result = mysqli_query($con, $sql);
+					//$resultCheck = mysqli_num_rows($result);
+					//$gtotal=0;
+					//if ($resultCheck > 0) {
+						//while ($row = mysqli_fetch_assoc($result)) {
+						//$savequantity = $row["quantity"];
+						//$saveprice = $row["price"];	
+						//$quantityprice = $savequantity*$saveprice;
+						//$gtotal += $quantityprice;
 
 
 						
 					?>
-					<h1 class="display-4 font-weight-bold"><p style="position: absolute;bottom: 30px;right: 30px;text-align: right"><?php echo "&#8369; " .$gtotal;?></p><h1>
-					<?php		}
+					<h1 class="display-4 font-weight-bold"><p style="position: absolute;bottom: 30px;right: 30px;text-align: right"><?php //echo "&#8369; " .$gtotal;?></p><h1>
+					<?php		//}
 				
-					}
+					//}
 					?>
 			</div>
 			
@@ -158,7 +158,7 @@
 							$sql = "SELECT * FROM order_items, menu, customer_order
 									WHERE order_items.menu_id = menu.menu_id
 									AND customer_order.order_id = order_items.order_id
-									AND customer_order.order_id ='".$order_id."';";
+									AND customer_order.order_id ='$order_id';";
 							$result = mysqli_query($con, $sql);
 							$resultCheck = mysqli_num_rows($result);
 							$total=0;
@@ -176,7 +176,7 @@
 							<td>&#8369;<?php echo $row["price"];?></td>
 							<td><?php echo $row["quantity"];?></td>
 							<td>&#8369; <?php echo $quantityprice;?>.00</td>
-							<td><a href="includes/deletesalesproduct.inc.php?id=<?php echo $row["menu_id"];?>&order_id=<?php echo $row["order_id"];?>"> Delete </a></td>
+							<td><a href="deleteorder.php?id=<?php echo $row["menu_id"];?>&order_id=<?php echo $row["order_id"];?>"> Delete </a></td>
 						</tr>
 					<?php		
 							}

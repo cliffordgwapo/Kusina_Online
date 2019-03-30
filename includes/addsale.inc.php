@@ -5,7 +5,7 @@
 	
 	$order_id = mysqli_real_escape_string($con, $_POST['order_id']);
 	$customer_id = mysqli_real_escape_string($con, $_POST['customer_id']);
-	$sql = "INSERT INTO `customer_order` (`order_id`, `customer_id`) VALUES ($order_id, '$customer_id');";
+	$sql = "INSERT INTO `customer_order` (`order_id`, `customer_id`) VALUES ('$order_id', '$customer_id');";
 	mysqli_query($con, $sql);
 	
 							$sql = "SELECT * 

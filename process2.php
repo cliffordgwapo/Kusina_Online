@@ -1,5 +1,5 @@
 <?php
-
+	session_start();
 	$mysqli = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
 	
 	$menu_id = 0;
@@ -16,13 +16,14 @@
 	$hide_id = '';
 	
 	if (isset($_POST['add'])) {
+		$id = $_SESSION['id'];
 		$menu_id = $_POST['menu_id'];
 		$menu_name = $_POST['menu_name'];
 		$menu_description = $_POST['menu_description'];
 		$price = $_POST['price'];
 		$unit = $_POST['unit'];
 		
-		$mysqli->query("INSERT INTO menu (menu_id, menu_name, menu_description, price, unit) VALUES('$menu_id', '$menu_name', '$menu_description', '$price', '$unit')") or die($mysqli->error);
+		$mysqli->query("INSERT INTO menu (id, menu_id, menu_name, menu_description, price, unit) VALUES('$id', '$menu_id', '$menu_name', '$menu_description', '$price', '$unit')") or die($mysqli->error);
 		header("location: menu.php");
 	}
 	if (isset($_GET['delete_id'])) {
@@ -63,7 +64,8 @@
 		$quantity = $_POST['quantity'];
 		
 		$mysqli->query("INSERT INTO order_items (order_id, menu_id, price, quantity) VALUES('$order_id', '$menu_id', '$price', '$quantity')") or die($mysqli->error);
-		header("location: order.php");
+					
+		header("location: order.php?order=$order_id");
 	}
 	if (isset($_GET['delete_order'])) {
 		

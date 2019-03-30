@@ -18,16 +18,25 @@
 			<div class="row">
 				<div class="col-sm-3">
 				</div>
-				<div class="col-sm-6 momo">
+				<div class="col-sm-6">
 					<h1 align="center" class="display-3">Kusina Online</h1>
 					<p ="lead">Please fill up the form provided.</p>
 					<div class="form-group">
 						<form action="process.php" method="post" class="example">
-						<label>Username</label>
-						<input type="username" class="form-control" name="username" required>
-						<label>Password</label>
-						<input type="password" class="form-control" name="password" required>
-						<input class="btn btn-primary btn-block button2" type="submit" value="Log in" name="submit">
+						<label>Old Password</label>
+						<input type="password" class="form-control" name="old_pwd" required>
+						<label>New Password</label>
+						<input type="password" class="form-control" name="new_pwd" pattern=".{8,}"   required title="8 characters minimum" required>
+						<label>Confirm Password</label>
+						<input type="password" class="form-control" name="con_pwd" pattern=".{8,}"   required title="8 characters minimum" required>
+						<div class="row">
+							<div class="col">
+								<input class="btn btn-primary btn-block button2" type="submit" value="Update Password" name="submit">
+							</div>
+							<div class="col">
+								<a  href="home.php"><input class="btn btn-primary btn-block button2" type="button" value="Cancel"></a>
+							</div>
+						</div>
 						</form>
 					</div>
 				</div>

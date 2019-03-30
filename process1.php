@@ -1,5 +1,6 @@
 <?php
-
+	session_start();
+	
 	$mysqli = new mysqli('localhost', 'root', '', 'kusina1') or die(mysqli($mysqli));
 	
 	$menu_id = 0;
@@ -20,6 +21,7 @@
 	$timestamp = '';
 	
 	if (isset($_POST['submit'])) {
+		$id = $_SESSION['id'];
 		$first_name = $_POST['first_name'];
 		$last_name = $_POST['last_name'];
 		$middle_initial = $_POST['middle_initial'];
@@ -29,7 +31,7 @@
 		$barangay = $_POST['barangay'];
 		$city = $_POST['city'];
 		
-		$mysqli->query("INSERT INTO customer (first_name, last_name, middle_initial, phone_number, province, street, barangay, city) VALUES('$first_name', '$last_name', '$middle_initial', '$phone_number', '$province', '$street', '$barangay', '$city')") or die($mysqli->error);
+		$mysqli->query("INSERT INTO customer (id, first_name, last_name, middle_initial, phone_number, province, street, barangay, city) VALUES('$id', '$first_name', '$last_name', '$middle_initial', '$phone_number', '$province', '$street', '$barangay', '$city')") or die($mysqli->error);
 		header("location: customer.php");
 	}
 	if (isset($_GET['delete'])) {
@@ -69,11 +71,12 @@
 		header("location: customer.php");
 	}
 	if (isset($_POST['add'])) {
+		$id = $_SESSION['id'];
 		$order_id = $_POST['order_id'];
 		$customer_id = $_POST['customer_id'];
 		
-		$mysqli->query("INSERT INTO customer_order (order_id, customer_id) VALUES('$order_id', '$customer_id')") or die($mysqli->error);
-		header("location: order.php");
+		$mysqli->query("INSERT INTO customer_order (id, order_id, customer_id) VALUES('$id', '$order_id', '$customer_id')") or die($mysqli->error);
+		header("location: order.php?order=$order_id&hide=''");
 	}
 	if (isset($_GET['delete_id'])) {
 		

@@ -1,38 +1,45 @@
 <?php
 
+session_start();
 
-session_start(); // Starting Session
-$error = ''; // Variable To Store Error Message
+if (isset($_POST['submit'])){
+	
+	include 'db.php';
+	
+	$username = mysqli_real_escape_string($con, $_POST['username']);
+	$password = md5(mysqli_real_escape_string($con, $_POST['password']));
+	
 
-if (isset($_POST['submit'])) {
-if (empty($_POST['username']) || empty($_POST['password'])) {
-$error = "Username or Password is invalid!";
-}else {
-	// Define $username and $password
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+	if (empty($username) || empty($password)){
+		header("Location: index.php?login=empty");
+		exit();
+	} else {
+		$sql = "SELECT * FROM admin WHERE username='$username'";
+		$result = mysqli_query($con, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if ($resultCheck < 1) {
+			header("Location: index.php?login=error");
+			exit();
+		} else {
+			if ($row = mysqli_fetch_assoc($result)){
 
-	// mysqli_connect() function opens a new connection to the MySQL server.
-	$conn = mysqli_connect("localhost", "root", "", "kusina1");
+				
+				if ($password == false){
+					header("Location: index.php?login=error");
+					exit();
+				} elseif ($password == true){
 
-	// SQL query to fetch information of registerd users and finds user match.
-	$query = "SELECT username, password from admin where username=? AND password=? LIMIT 1";
-
-	// To protect MySQL injection for Security purpose
-	$stmt = $conn->prepare($query);
-	$stmt->bind_param("ss", $username, $password);
-	$stmt->execute();
-	$stmt->bind_result($username, $password);
-	$stmt->store_result();
-
-	if($stmt->fetch()) //fetching the contents of the row
-        {
-          $_SESSION['login_user'] = $username; // Initializing Session
-          header("location: home.php"); // Redirecting To Profile Page
-        }else {
-			$error = "Username or Password is invalid!";
+					$_SESSION['id'] = $row['id'];
+					$_SESSION['username'] = $row['username'];
+					$_SESSION['password'] = $row['password'];
+					header("Location: home.php?login=success");
+					exit();
+				}
+				
+			}
 		}
-	mysqli_close($conn); // Closing Connection
 	}
+} else {
+	header("Location: index.php?login=error");
+	exit();
 }
-?>

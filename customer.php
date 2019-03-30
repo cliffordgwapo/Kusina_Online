@@ -1,9 +1,6 @@
 <?php  
-	include('session.php');
+	session_start();
 	
-	if(!isset($_SESSION['login_user'])) {
-		header("location: index.php");
-	}
 	if(isset($_POST['btn_search']))
 	{
     $search = $_POST['search'];
@@ -60,22 +57,25 @@
 						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="order.php">Order</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Reports</a>
+						<a class="nav-link" href="order_reports.php">Order</a>
 					</li>
 				</ul>
 			</div>
 			<form class="form-inline my-2 my-lg-0">
 				<div id="profile">
-					<b><i><?php echo $login_session; ?></i></b>
+					<b><i><?php if(isset($_SESSION['id'])){
+									echo ($_SESSION['username']);
+								}
+								else{
+								header("Location: index.php");
+							}?></i></b>
 				</div>
 				<div class="dropdown">
 					<img src="prof.jpg" alt="Profile Picture" width="40" height="40" class="mr-sm-2">
 					<div class="dropdown-content" style="right: 0; left: auto;">
 						<img src="prof.jpg" alt="" width="200" height="200">
-						<div class="desc"><b id="logout"><a href="logout.php">Log Out</a></b></div>
+						<div class="desc"><b><a href="pwdupdate.php">Update Password</a></b></div>
+						<div class="desc" onclick="return confirm('Are you sure?');"><b id="logout"><a href="logout.php">Log Out</a></b></div>
 					</div>
 				</div>
 			</form>
@@ -136,25 +136,23 @@
 								</button>
 						</div>
 						<div class="modal-body">
-							<?php require_once 'process1.php'; ?>
 							<form action="process1.php" method="post">
-								<input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
 								<label class="col-form-label">First Name:</label>
-								<input type="text" class="form-control form-control-sm" name="first_name" placeholder="first name" value="<?php echo $first_name; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="first_name" placeholder="first name" value="" required>
 								<label class="col-form-label">Last Name:</label>
-								<input type="text" class="form-control form-control-sm" name="last_name" placeholder="last name" value="<?php echo $last_name; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="last_name" placeholder="last name" value="" required>
 								<label class="col-form-label">Middle Initial:</label>
-								<input type="text" class="form-control form-control-sm" name="middle_initial" placeholder="middle initial" value="<?php echo $middle_initial; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="middle_initial" placeholder="middle initial" value="" required>
 								<label class="col-form-label">Phone Number:</label>
-								<input type="text" class="form-control form-control-sm" name="phone_number" placeholder="phone number" value="<?php echo $phone_number; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="phone_number" placeholder="phone number" value="" required>
 								<label class="col-form-label">Province:</label>
-								<input type="text" class="form-control form-control-sm" name="province" placeholder="province" value="<?php echo $province; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="province" placeholder="province" value="" required>
 								<label class="col-form-label">Street:</label>
-								<input type="text" class="form-control form-control-sm" name="street" placeholder="street" value="<?php echo $street; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="street" placeholder="street" value="" required>
 								<label class="col-form-label">Barangay:</label>
-								<input type="text" class="form-control form-control-sm" name="barangay" placeholder="barangay" value="<?php echo $barangay; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="barangay" placeholder="barangay" value="" required>
 								<label class="col-form-label">City:</label>
-								<input type="text" class="form-control form-control-sm" name="city" placeholder="city" value="<?php echo $city; ?>" required>
+								<input type="text" class="form-control form-control-sm" name="city" placeholder="city" value="" required>
 								<input class="btn btn-primary btn-block button2" type="submit" name="submit" value="Save" onclick="return confirm('Are you sure?');">
 							</form>
 						</div>

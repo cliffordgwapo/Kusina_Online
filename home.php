@@ -1,9 +1,5 @@
 <?php  
-	include('session.php');
-	
-	if(!isset($_SESSION['login_user'])) {
-		header("location: index.php");
-	}
+	session_start();
  ?>  
 <DOCTYPE! html>
 <html lang="en"> 
@@ -39,21 +35,24 @@
 						<a class="nav-link" href="menu.php">Menu</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="order.php">Order</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Reports</a>
+						<a class="nav-link" href="order_reports.php">Reports</a>
 					</li>
 				</ul>
 			</div>
 			<form class="form-inline my-2 my-lg-0">
 				<div id="profile">
-					<b><i><?php echo $login_session; ?></i></b>
+					<b><i><?php if(isset($_SESSION['id'])){
+									echo ($_SESSION['username']);
+								}
+								else{
+								header("Location: index.php");
+							}?></i></b>
 				</div>
 				<div class="dropdown">
 					<img src="prof.jpg" alt="Profile Picture" width="40" height="40" class="mr-sm-2">
 					<div class="dropdown-content" style="right: 0; left: auto;">
 						<img src="prof.jpg" alt="" width="200" height="200">
+						<div class="desc"><b><a href="pwdupdate.php">Update Password</a></b></div>
 						<div class="desc"><b id="logout"><a href="logout.php">Log Out</a></b></div>
 					</div>
 				</div>

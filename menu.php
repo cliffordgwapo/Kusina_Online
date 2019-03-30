@@ -1,9 +1,6 @@
 <?php  
-	include('session.php');
+	session_start();
 	
-	if(!isset($_SESSION['login_user'])) {
-		header("location: index.php");
-	}
 	if(isset($_POST['btn_search']))
 	{
     $search = $_POST['search'];
@@ -60,21 +57,24 @@
 						<a class="nav-link" href="menu.php">Menu <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="order.php">Order</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Reports</a>
+						<a class="nav-link" href="order_reports.php">Order</a>
 					</li>
 				</ul>
 			</div>
 			<form class="form-inline my-2 my-lg-0">
 				<div id="profile">
-					<b><i><?php echo $login_session; ?></i></b>
+					<b><i><?php if(isset($_SESSION['id'])){
+									echo ($_SESSION['username']);
+								}
+								else{
+								header("Location: index.php");
+							}?></i></b>
 				</div>
 				<div class="dropdown">
 					<img src="prof.jpg" alt="Profile Picture" width="40" height="40" class="mr-sm-2">
 					<div class="dropdown-content" style="right: 0; left: auto;">
 						<img src="prof.jpg" alt="" width="200" height="200">
+						<div class="desc"><b><a href="pwdupdate.php">Update Password</a></b></div>
 						<div class="desc"><b id="logout"><a href="logout.php">Log Out</a></b></div>
 					</div>
 				</div>
@@ -91,7 +91,10 @@
 				</form>
 				
 		</nav>
+		
+			
 			<div class="table-responsive">
+			
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -233,6 +236,49 @@
 									<?php endif; ?>
 									</div>
 								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="example_addorders" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="form-control" style="width: 1200px">
+					<div class="modal-content modal-lg">
+						<div class="modal-header">
+							<h5 class="modal-title" >Add New Order</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+						<div class="modal-body">
+							
+							<form action="process1.php" method="post">
+								<label class="col-form-label">Order ID:</label>
+								<input type="text" class="form-control form-control-sm" name="order_id" placeholder="Order Id" value="" required>
+								<label class="col-form-label">Customer Name:</label>
+								<select name="customer_id" class="form-control" required>
+									<?php
+										include_once 'db.php';
+										$id = $_SESSION['id'];
+										$sql = "SELECT * 
+											FROM customer";
+										$result = mysqli_query($con, $sql);
+										$resultCheck = mysqli_num_rows($result);
+									
+										if ($resultCheck > 0) {
+											while ($row = mysqli_fetch_assoc($result)) {
+									?>
+									
+										<option value="<?php echo $row["customer_id"];?>"><?php echo $row["first_name"];?></option>
+									<?php		}
+					
+									}
+									?>
+								</select>
+								<input class="btn btn-primary btn-block button2" type="submit" name="add" value="Add to order" onclick="return confirm('Are you sure?');">
 							</form>
 						</div>
 						<div class="modal-footer">

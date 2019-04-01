@@ -106,8 +106,8 @@
 				<tr>
 				  <th scope="col">Menu ID</th>
 				  <th scope="col">Description</th>
-				  <th scope="col">Quantity</th>
 				  <th scope="col">Price</th>
+				  <th scope="col">Quantity</th>
 				  <th scope="col">Subtotal</th>
 				  
 				</tr>

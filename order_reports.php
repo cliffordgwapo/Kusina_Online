@@ -58,13 +58,13 @@
 		</nav>
 		<div class="row" style="background-color:#2F4F4F">
 			<div class="col-8" style="borderl-style: solid;color: #00FF00;text-align: center">
-			
 				<h1 style=" font-family: AR DELANEY, serif;" class="display-1 font-weight-bold">REPORTS</h1>
+				<button type="submit" name="cancel" class="btn btn-light"><a data-toggle="modal" data-target="#example_addorders" href="">Add Menu Orders</a></button>
 			</div>
 			<div class="col-4" style="background-image: url('kusina.jpg');background-size: contain; height: 200px;background-repeat: no-repeat;">
 			
 			</div>
-		</div>
+		</div></br>
 		<div class="row">
 			<div class="col-8">
 			<form action = "search.php" method="GET" >
@@ -73,21 +73,21 @@
 						<p>FROM: </p>
 					</div>
 					<div class="col-3">
-						<input type="datetime-local" class="form-control" name="startdate" style="width: 195px;" required>
+						<input type="datetime-local" class="form-control form-control-sm" name="startdate" style="width: 195px;" required>
 					</div>
 					<div class="col-1">
 						<p>TO: </p>
 					</div>
 					<div class="col-3">
-						<input type="datetime-local" class="form-control" name="enddate" style="width: 192px;" required>
+						<input type="datetime-local" class="form-control form-control-sm" name="enddate" style="width: 192px;" required>
 					</div>
-					<button type="submit" class="btn btn-primary"> Submit</button>
-					<button class="btn btn-light"><a href="order_reports.php"> Reset</a></button>
+					<button type="submit" class="btn btn-primary btn-sm"> Submit</button>
+					<button class="btn btn-light btn-sm"><a href="order_reports.php"> Reset</a></button>
 				</div>
 			</form>
 			<form><br>
-				<button type="submit" name="cancel" class="btn btn-light"><a href="addorder.php"><i class="fas fa-plus-circle    "></i>Add Menu Orders</a></button>
-					<br/><br/>
+				
+					
 		
 			<div class="table-responsive">
 				<table class="table">
@@ -157,12 +157,8 @@
 										$query_sum = mysqli_query($con,$sql);
 									?>
 									<?php while($row = mysqli_fetch_array($query_sum)):?>
-									<div class="dropdown">
 										<?php echo "&#8369; " .$row['total']. " Total Sales";?>
-										<div class="dropdown-content">	
-											<a href="order.php?order=''&hide=''">View Sales</a>
-										</div>
-									</div>
+										
 									<?php endwhile;?>
 								</td>
 							</tr>
@@ -210,12 +206,8 @@
 										$query_items = mysqli_query($con,$sql);
 									?>
 									<?php while($row = mysqli_fetch_array($query_items)):?>
-									<div class="dropdown">
+								
 										<?php echo $row['count']. " Orders";?>
-										<div class="dropdown-content">	
-											<a href="customer.php">View Orders</a>
-										</div>
-									</div>
 										
 									<?php endwhile;?>
 								</td>
@@ -228,5 +220,53 @@
 		</div>
 	<br/><br/>
 	<br/><br/><br/><br/><br/><br/>
+	<div class="modal fade" id="example_addorders" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="form-control" style="width: 1200px">
+					<div class="modal-content modal-lg">
+						<div class="modal-header">
+							<h5 class="modal-title" >Add New Order</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+						<div class="modal-body">
+							<form action = "includes/addsale.inc.php" method="POST">
+									<label><b>Order ID</b></label>
+									<input type="text" class="form-control" name="order_id" value="" placeholder="order id" required>
+									<label for="inputName" ><b>Customer</b></label>
+								
+											<select class="form-control" name ="customer_id" required>
+												<option value="" readonly>Select Customer Name</option>
+											<?php
+												include_once 'db.php';
+												$id = $_SESSION['id'];
+												$sql = "SELECT * 
+														FROM customer AS p 
+														JOIN admin AS r 
+														WHERE p.id = $id  
+														AND r.id = $id;";
+												$result = mysqli_query($con, $sql);
+												$resultCheck = mysqli_num_rows($result);
+												
+												if ($resultCheck > 0) {
+													while ($row = mysqli_fetch_assoc($result)) {
+											?>
+												
+												<option value="<?php echo $row["customer_id"];?>"><?php echo $row["first_name"];?></option>
+											<?php		}
+								
+											}
+											?>
+											</select></br>	
+										<button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 </body>  
 </html>	

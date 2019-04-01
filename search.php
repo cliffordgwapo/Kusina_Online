@@ -89,8 +89,8 @@
 							  <th scope="col">Amount</th>
 							  <th scope="col">Action</th>
 							</tr>
-						  </thead>
-						  <tbody>
+						</thead>
+						<tbody>
 										<?php
 										include_once 'db.php';
 										$id = $_SESSION['id'];

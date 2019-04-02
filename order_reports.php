@@ -59,9 +59,9 @@
 		<div class="row" style="background-color:#2F4F4F">
 			<div class="col-8" style="borderl-style: solid;color: #00FF00;text-align: center">
 				<h1 style=" font-family: AR DELANEY, serif;" class="display-1 font-weight-bold">REPORTS</h1>
-				<button type="submit" name="cancel" class="btn btn-light"><a data-toggle="modal" data-target="#example_addorders" href="">Add Menu Orders</a></button>
+				<button data-toggle="modal" data-target="#example_addorders" type="submit" name="cancel" style="margin-bottom:10px" class="btn btn-primary">Add Menu Orders</button>
 			</div>
-			<div class="col-4" style="background-image: url('kusina.jpg');background-size: contain; height: 200px;background-repeat: no-repeat;">
+			<div class="col-4" style="background-image: url('kusina.jpg');background-size: contain; height: 210px;background-repeat: no-repeat;">
 			
 			</div>
 		</div></br>
@@ -81,7 +81,7 @@
 					<div class="col-3">
 						<input type="datetime-local" class="form-control form-control-sm" name="enddate" style="width: 192px;" required>
 					</div>
-					<button type="submit" class="btn btn-primary btn-sm"> Submit</button>
+					<button type="submit" style="width: 200px" class="btn btn-primary btn-sm"> Search</button>
 					<button class="btn btn-light btn-sm"><a href="order_reports.php"> Reset</a></button>
 				</div>
 			</form>
@@ -128,7 +128,7 @@
 					  <td><?php echo $timestamp_dt;?></td>
 
 					  <td>&#8369; <?php echo $sum;?></td>
-					  <td> <button class="btn btn-light btn-sm"><a href="viewcheckoutsummary.php?order=<?php echo $order_id; ?>&no=<?php echo $customer_id; ?>">View</a></button></td>
+					  <td> <button class="btn btn-light btn-sm"><a href="view_orders.php?order=<?php echo $order_id; ?>&no=<?php echo $customer_id; ?>">View</a></button></td>
 					  
 					</tr>
 					<?php		
@@ -156,7 +156,7 @@
 										$sql = "SELECT SUM(price * quantity) AS `total` FROM order_items";
 										$query_sum = mysqli_query($con,$sql);
 									?>
-									<?php while($row = mysqli_fetch_array($query_sum)):?>
+									<?php while($row = mysqli_fetch_array($query_sum)):?>	
 										<?php echo "&#8369; " .$row['total']. " Total Sales";?>
 										
 									<?php endwhile;?>

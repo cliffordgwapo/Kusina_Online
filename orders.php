@@ -94,7 +94,7 @@
 							  <button type="submit" name="submit" class="btn btn-primary btn-sm">Add Menu</button>
 						</div>
 						<div class="col-2">
-							  <button class="btn btn-light btn-sm"><a href="checkoutsummary.php?order=<?php echo $order_id; ?>&no=<?php echo $customer_id; ?>">Done</a></button>
+							  <button class="btn btn-light btn-sm"><a href="orders_summary.php?order=<?php echo $order_id; ?>&no=<?php echo $customer_id; ?>">Done</a></button>
 						</div>
 								<script>
 									$(document).ready(function(){
